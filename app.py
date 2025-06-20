@@ -135,7 +135,8 @@ with tab2:
 # TAB 3 : Daily Trends & Growth
 # ----------------------------
 with tab3:
-    st.header("📈 Daily Trends and Growth Rate")
+    st.header("📈 Daily Trends")
+
     sel_country2 = st.selectbox(
         "Country for Trend",
         sorted(countries_with_data),
@@ -144,7 +145,9 @@ with tab3:
 
     df_c = df_valid[df_valid["country"] == sel_country2].copy()
     df_c = df_c.sort_values("date")
-    df_c["growth_rate"] = df_c["confirmed"].pct_change().fillna(0)
+
+    # 不再计算或使用 growth_rate
+    # df_c["growth_rate"] = df_c["confirmed"].pct_change().fillna(0)
 
     fig = go.Figure()
     fig.add_scatter(
@@ -153,24 +156,14 @@ with tab3:
         mode="lines",
         name="Daily New Cases"
     )
-    fig.add_scatter(
-        x=df_c["date"],
-        y=df_c["growth_rate"] * 100,
-        mode="lines",
-        name="Growth Rate %",
-        yaxis="y2"
-    )
 
     fig.update_layout(
-        title=f"Daily New Cases & Growth Rate – {sel_country2}",
+        title=f"Daily New Cases in {sel_country2}",
         xaxis_title="Date",
-        yaxis=dict(title="New Cases"),
-        yaxis2=dict(
-            title="Growth Rate (%)",
-            overlaying="y",
-            side="right"
-        ),
+        yaxis_title="New Cases",
         legend=dict(x=0.01, y=0.99)
     )
+
     st.plotly_chart(fig, use_container_width=True)
+
 
