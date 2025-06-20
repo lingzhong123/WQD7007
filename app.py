@@ -121,7 +121,9 @@ with tab2:
     countries_with_data = df_valid[df_valid["daily_new_cases"] > 0]["country"].unique()
     sel_country = st.selectbox("Select Country", sorted(countries_with_data))
 
-    df_c = df_valid[df_valid["country"] == sel_country]
+    # ✅ 添加过滤：仅保留 daily_new_cases >= 0 的数据
+    df_c = df_valid[(df_valid["country"] == sel_country) & (df_valid["daily_new_cases"] >= 0)]
+
     fig_box = px.box(
         df_c,
         x="country",
@@ -130,6 +132,7 @@ with tab2:
         title="Daily New Cases Distribution (Outliers Highlighted)"
     )
     st.plotly_chart(fig_box, use_container_width=True)
+
 
 # ----------------------------
 # TAB 3 : Daily Trends & Growth
