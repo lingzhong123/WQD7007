@@ -135,7 +135,7 @@ with tab2:
 # TAB 3 : Daily Trends & Growth
 # ----------------------------
 with tab3:
-    st.header("📈 Growth Rate Only View")
+    st.header("📈 Growth Rate View")
 
     sel_country2 = st.selectbox(
         "Country for Trend",
