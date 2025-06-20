@@ -146,7 +146,7 @@ with tab3:
     df_c = df_valid[df_valid["country"] == sel_country2].copy()
     df_c = df_c.sort_values("date")
 
-    # 不再计算或使用 growth_rate
+    
     # df_c["growth_rate"] = df_c["confirmed"].pct_change().fillna(0)
 
     fig = go.Figure()
